@@ -1,0 +1,20 @@
+# Codeception Test Suite Configuration
+#
+# Suite for acceptance tests.
+# Perform tests in browser using the WebDriver or PhpBrowser.
+# If you need both WebDriver and PHPBrowser tests - create a separate suite.
+
+actor: AcceptanceTester
+modules:
+    enabled:
+        - PhpBrowser:
+            url: http://api.site
+        - \Helper\Acceptance
+        - Db:
+            dsn: 'mysql:host=localhost;dbname=testapi'
+            user: 'root'
+            password: ''
+            dump: 'tests/_data/api.sql'
+            populate: true # run populator before all tests
+            cleanup: true # run populator before each test
+            populator: 'mysql -u $user -h $host $dbname < $dump'
